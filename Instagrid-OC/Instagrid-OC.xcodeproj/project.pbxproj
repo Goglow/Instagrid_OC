@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835982DE239C7F5E00E457ED /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835982DD239C7F5E00E457ED /* Delm-Medium.otf */; };
+		835982E0239C7F6400E457ED /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835982DF239C7F6400E457ED /* ThirstySoftRegular.otf */; };
 		83915944239AB4020008D18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83915943239AB4020008D18C /* AppDelegate.swift */; };
 		83915946239AB4020008D18C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83915945239AB4020008D18C /* ViewController.swift */; };
 		83915949239AB4020008D18C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83915947239AB4020008D18C /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		835982DD239C7F5E00E457ED /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
+		835982DF239C7F6400E457ED /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
 		83915940239AB4020008D18C /* Instagrid-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagrid-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83915943239AB4020008D18C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83915945239AB4020008D18C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +39,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		835982D9239C7F0200E457ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		835982DA239C7F2500E457ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83915947239AB4020008D18C /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		835982DB239C7F3200E457ED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83915945239AB4020008D18C /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		835982DC239C7F3B00E457ED /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				83915943239AB4020008D18C /* AppDelegate.swift */,
+				8391594A239AB4020008D18C /* Assets.xcassets */,
+				8391594C239AB4020008D18C /* LaunchScreen.storyboard */,
+				8391594F239AB4020008D18C /* Info.plist */,
+				835982DD239C7F5E00E457ED /* Delm-Medium.otf */,
+				835982DF239C7F6400E457ED /* ThirstySoftRegular.otf */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		83915937239AB4020008D18C = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +94,10 @@
 		83915942239AB4020008D18C /* Instagrid-OC */ = {
 			isa = PBXGroup;
 			children = (
-				83915943239AB4020008D18C /* AppDelegate.swift */,
-				83915945239AB4020008D18C /* ViewController.swift */,
-				83915947239AB4020008D18C /* Main.storyboard */,
-				8391594A239AB4020008D18C /* Assets.xcassets */,
-				8391594C239AB4020008D18C /* LaunchScreen.storyboard */,
-				8391594F239AB4020008D18C /* Info.plist */,
+				835982D9239C7F0200E457ED /* Model */,
+				835982DA239C7F2500E457ED /* View */,
+				835982DB239C7F3200E457ED /* Controller */,
+				835982DC239C7F3B00E457ED /* Supporting files */,
 			);
 			path = "Instagrid-OC";
 			sourceTree = "<group>";
@@ -125,6 +163,8 @@
 			files = (
 				8391594E239AB4020008D18C /* LaunchScreen.storyboard in Resources */,
 				8391594B239AB4020008D18C /* Assets.xcassets in Resources */,
+				835982E0239C7F6400E457ED /* ThirstySoftRegular.otf in Resources */,
+				835982DE239C7F5E00E457ED /* Delm-Medium.otf in Resources */,
 				83915949239AB4020008D18C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +316,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53FLK3FCZ4;
-				INFOPLIST_FILE = "Instagrid-OC/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Instagrid-OC/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Goglow.Instagrid-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -291,7 +331,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53FLK3FCZ4;
-				INFOPLIST_FILE = "Instagrid-OC/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Instagrid-OC/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Goglow.Instagrid-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
