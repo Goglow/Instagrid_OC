@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		835982DE239C7F5E00E457ED /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835982DD239C7F5E00E457ED /* Delm-Medium.otf */; };
 		835982E0239C7F6400E457ED /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835982DF239C7F6400E457ED /* ThirstySoftRegular.otf */; };
+		836A24D3239D3D5A00DCFE11 /* CenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A24D2239D3D5A00DCFE11 /* CenterView.swift */; };
+		836A24D5239D3D6700DCFE11 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A24D4239D3D6700DCFE11 /* LayoutView.swift */; };
 		83915944239AB4020008D18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83915943239AB4020008D18C /* AppDelegate.swift */; };
 		83915946239AB4020008D18C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83915945239AB4020008D18C /* ViewController.swift */; };
 		83915949239AB4020008D18C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83915947239AB4020008D18C /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		835982DD239C7F5E00E457ED /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 		835982DF239C7F6400E457ED /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
+		836A24D2239D3D5A00DCFE11 /* CenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterView.swift; sourceTree = "<group>"; };
+		836A24D4239D3D6700DCFE11 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		83915940239AB4020008D18C /* Instagrid-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagrid-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83915943239AB4020008D18C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83915945239AB4020008D18C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 			isa = PBXGroup;
 			children = (
 				83915947239AB4020008D18C /* Main.storyboard */,
+				836A24D2239D3D5A00DCFE11 /* CenterView.swift */,
+				836A24D4239D3D6700DCFE11 /* LayoutView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,7 +182,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836A24D5239D3D6700DCFE11 /* LayoutView.swift in Sources */,
 				83915946239AB4020008D18C /* ViewController.swift in Sources */,
+				836A24D3239D3D5A00DCFE11 /* CenterView.swift in Sources */,
 				83915944239AB4020008D18C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
