@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var currentButton: UIButton?
     var arrayPhotos = [UIImage]()
     var imageIndex = 0
     
@@ -23,6 +24,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSharePicture(_ :)))
         leftSwipeGestureRecognizer.direction = .left
         centerView.addGestureRecognizer(leftSwipeGestureRecognizer)
+        
+        setLayout(layout: 3)
+        setCenterView(layout: 3)
     }
 
     // Outlets
@@ -35,6 +39,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // Actions
     @IBAction func didTapPhotoButton(_ sender: UIButton) {
+        self.currentButton = sender
         addPicture()
     }
     
@@ -52,16 +57,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let imagePicked: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        centerView.upLeftButton?.setImage(imagePicked, for: .normal)
-        centerView.upLeftButton?.imageView?.contentMode = .scaleAspectFill
-        centerView.upRightButton?.setImage(imagePicked, for: .normal)
-        centerView.upRightButton?.imageView?.contentMode = .scaleAspectFill
-        centerView.downLeftButton?.setImage(imagePicked, for: .normal)
-        centerView.downLeftButton?.imageView?.contentMode = .scaleAspectFill
-        centerView.downRightButton?.setImage(imagePicked, for: .normal)
-        centerView.downRightButton?.imageView?.contentMode = .scaleAspectFill
+        guard let button = currentButton else {
+            return
+        }
+        button.setImage(imagePicked, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         arrayPhotos.append(imagePicked)
         dismiss(animated: true, completion: nil)
     }
@@ -108,6 +110,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
+        
       /*  if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
                 case UISwipeGestureRecognizerDirection.Right :
@@ -130,6 +133,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     image.image = UIImage(named: imageList[imageIndex])
                 default:
                     break //stops the code/codes nothing.*/
+        
+        
+        
     }
     
     private func resetCustomPicture() {
