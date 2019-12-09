@@ -16,10 +16,10 @@ class CenterView: UIView {
         }
     }
     
-    @IBOutlet private var upLeftButton: UIButton?
-    @IBOutlet private var upRightButton: UIButton?
-    @IBOutlet private var downLeftButton: UIButton?
-    @IBOutlet private var downRightButton: UIButton?
+    @IBOutlet weak var upLeftButton: UIButton?
+    @IBOutlet weak var upRightButton: UIButton?
+    @IBOutlet weak var downLeftButton: UIButton?
+    @IBOutlet weak var downRightButton: UIButton?
     
     private func setStyle(_ style: Int) {
         switch style {

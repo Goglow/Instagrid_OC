@@ -233,15 +233,11 @@
                     </view>
                     <connections>
                         <outlet property="centerView" destination="zgr-4z-zv8" id="NS4-pk-fsf"/>
-                        <outlet property="downLeftImage" destination="nAW-VQ-tnS" id="76l-Ku-hHM"/>
-                        <outlet property="downRightImage" destination="zxm-a6-cOE" id="YV9-PE-zRw"/>
                         <outlet property="instagridLabel" destination="pmC-KP-J0j" id="rsN-jc-klI"/>
                         <outlet property="layoutView" destination="x5t-yK-5nP" id="Iyw-Vt-oTa"/>
                         <outlet property="swipeLabel" destination="tfv-Ic-Iic" id="3x7-EZ-Bsw"/>
                         <outlet property="swipeView" destination="mB6-8J-vTy" id="Nez-k3-mPK"/>
                         <outlet property="upImageView" destination="xzv-Oa-lK6" id="vTS-fu-erW"/>
-                        <outlet property="upLeftImage" destination="LGf-3m-p4w" id="Rdg-oZ-EQK"/>
-                        <outlet property="upRightImage" destination="xAw-ZP-Wk5" id="RPb-BW-UXE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

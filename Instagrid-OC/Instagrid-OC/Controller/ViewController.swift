@@ -10,10 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var upLeftImage: UIImageView!
-    @IBOutlet weak var upRightImage: UIImageView!
-    @IBOutlet weak var downLeftImage: UIImageView!
-    @IBOutlet weak var downRightImage: UIImageView!
+    var arrayPhotos = [UIImage]()
+    var imageIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +53,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let image: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        upLeftImage.image = image; upRightImage.image = image; downLeftImage.image = image; downRightImage.image = image
+        let imagePicked: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        centerView.upLeftButton?.setImage(imagePicked, for: .normal)
+        centerView.upLeftButton?.imageView?.contentMode = .scaleAspectFill
+        centerView.upRightButton?.setImage(imagePicked, for: .normal)
+        centerView.upRightButton?.imageView?.contentMode = .scaleAspectFill
+        centerView.downLeftButton?.setImage(imagePicked, for: .normal)
+        centerView.downLeftButton?.imageView?.contentMode = .scaleAspectFill
+        centerView.downRightButton?.setImage(imagePicked, for: .normal)
+        centerView.downRightButton?.imageView?.contentMode = .scaleAspectFill
+        arrayPhotos.append(imagePicked)
         dismiss(animated: true, completion: nil)
     }
     
@@ -70,34 +76,71 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
-        self.swipeLabel.text = "Swipe up to share"
-        switch sender.state {
-        case .began, .changed:
-            shareCustomPictureWith(gesture: sender)
-        case .cancelled, .ended:
-            resetCustomPicture()
-        default:
-            break
+        swipeLabel.text = "Swipe up to share"
+        if arrayPhotos.count != 0 {
+            switch sender.state {
+            case .began, .changed:
+                shareCustomPictureWith(gesture: sender)
+            case .cancelled, .ended:
+                resetCustomPicture()
+            default:
+                break
+            }
+        } else {
+            alertPhotoMissed()
         }
     }
     
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
-        self.swipeLabel.text = "Swipe left to share"
-        switch sender.state {
-        case .began, .changed:
-            shareCustomPictureWith(gesture: sender)
-        case .cancelled, .ended:
-            resetCustomPicture()
-        default:
-            break
+        swipeLabel.text = "Swipe left to share"
+        if arrayPhotos.count != 0 {
+            switch sender.state {
+            case .began, .changed:
+                shareCustomPictureWith(gesture: sender)
+            case .cancelled, .ended:
+                resetCustomPicture()
+            default:
+                break
+            }
+        } else {
+            alertPhotoMissed()
         }
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
-        
+      /*  if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+                case UISwipeGestureRecognizerDirection.Right :
+                    println("User swiped right")
+                    // decrease index first
+                    imageIndex--
+                    // check if index is in range
+                    if imageIndex < 0 {
+                        imageIndex = maxImages
+                    }
+                    image.image = UIImage(named: imageList[imageIndex])
+                case UISwipeGestureRecognizerDirection.Left:
+                    println("User swiped Left")
+                    // increase index first
+                    imageIndex++
+                    // check if index is in range
+                    if imageIndex > maxImages {
+                        imageIndex = 0
+                    }
+                    image.image = UIImage(named: imageList[imageIndex])
+                default:
+                    break //stops the code/codes nothing.*/
     }
     
     private func resetCustomPicture() {
-        
+        arrayPhotos = []
+    }
+    
+    private func alertPhotoMissed() {
+        let message = "The minimum number of photos that must be added has not been reached."
+        let alert = UIAlertController(title: "Minimum Not Reached", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(_: UIAlertAction!) in
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
