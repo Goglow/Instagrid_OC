@@ -25,8 +25,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         leftSwipeGestureRecognizer.direction = .left
         centerView.addGestureRecognizer(leftSwipeGestureRecognizer)
         
-        setLayout(layout: 3)
-        setCenterView(layout: 3)
+        setLayout(layout: 2)
+        setCenterView(layout: 2)
     }
 
     // Outlets
@@ -79,63 +79,74 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         swipeLabel.text = "Swipe up to share"
-        if arrayPhotos.count != 0 {
-            switch sender.state {
-            case .began, .changed:
-                shareCustomPictureWith(gesture: sender)
-            case .cancelled, .ended:
-                resetCustomPicture()
-            default:
-                break
+        switch layoutView.style {
+        case 1, 2:
+            if arrayPhotos.count <= 2 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
             }
-        } else {
-            alertPhotoMissed()
+        case 3:
+            if arrayPhotos.count <= 3 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
+            }
+        default:
+            break
         }
     }
     
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
         swipeLabel.text = "Swipe left to share"
-        if arrayPhotos.count != 0 {
-            switch sender.state {
-            case .began, .changed:
-                shareCustomPictureWith(gesture: sender)
-            case .cancelled, .ended:
-                resetCustomPicture()
-            default:
-                break
+        switch layoutView.style {
+        case 1, 2:
+            if arrayPhotos.count <= 2 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
             }
-        } else {
-            alertPhotoMissed()
+        case 3:
+            if arrayPhotos.count <= 3 {
+                alertPhotoMissed()
+            } else {
+
+                    switch sender.state {
+                    case .began:
+                        shareCustomPictureWith(gesture: sender)
+                    case .ended:
+                        resetCustomPicture()
+                    default:
+                        break
+                    }
+            }
+        default:
+            break
         }
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
-        
-      /*  if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-                case UISwipeGestureRecognizerDirection.Right :
-                    println("User swiped right")
-                    // decrease index first
-                    imageIndex--
-                    // check if index is in range
-                    if imageIndex < 0 {
-                        imageIndex = maxImages
-                    }
-                    image.image = UIImage(named: imageList[imageIndex])
-                case UISwipeGestureRecognizerDirection.Left:
-                    println("User swiped Left")
-                    // increase index first
-                    imageIndex++
-                    // check if index is in range
-                    if imageIndex > maxImages {
-                        imageIndex = 0
-                    }
-                    image.image = UIImage(named: imageList[imageIndex])
-                default:
-                    break //stops the code/codes nothing.*/
-        
-        
-        
     }
     
     private func resetCustomPicture() {
