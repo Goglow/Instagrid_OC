@@ -80,34 +80,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         swipeLabel.text = "Swipe up to share"
         switch layoutView.style {
-            case 1, 2:
-                if arrayPhotos.count < 3 {
-                    alertPhotoMissed()
-                } else {
-                    switch sender.state {
-                    case .began:
-                        shareCustomPictureWith(gesture: sender)
-                    case .ended:
-                        resetCustomPicture()
-                    default:
-                        break
-                    }
+        case 1, 2:
+            if arrayPhotos.count < 3 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
             }
-            case 3:
-                if arrayPhotos.count < 4 {
-                    alertPhotoMissed()
-                } else {
-                    switch sender.state {
-                    case .began:
-                        shareCustomPictureWith(gesture: sender)
-                    case .ended:
-                        resetCustomPicture()
-                    default:
-                        break
-                    }
+        case 3:
+            if arrayPhotos.count < 4 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
             }
-            default:
-                break
+        default:
+            break
         }
     }
     
