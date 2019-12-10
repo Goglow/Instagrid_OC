@@ -80,58 +80,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         swipeLabel.text = "Swipe up to share"
         switch layoutView.style {
-        case 1, 2:
-            if arrayPhotos.count <= 2 {
-                alertPhotoMissed()
-            } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
-                }
-            }
-        case 3:
-            if arrayPhotos.count <= 3 {
-                alertPhotoMissed()
-            } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
-                }
-            }
-        default:
-            break
-        }
-    }
-    
-    @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
-        swipeLabel.text = "Swipe left to share"
-        switch layoutView.style {
-        case 1, 2:
-            if arrayPhotos.count <= 2 {
-                alertPhotoMissed()
-            } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
-                }
-            }
-        case 3:
-            if arrayPhotos.count <= 3 {
-                alertPhotoMissed()
-            } else {
-
+            case 1, 2:
+                if arrayPhotos.count < 3 {
+                    alertPhotoMissed()
+                } else {
                     switch sender.state {
                     case .began:
                         shareCustomPictureWith(gesture: sender)
@@ -141,16 +93,74 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         break
                     }
             }
+            case 3:
+                if arrayPhotos.count < 4 {
+                    alertPhotoMissed()
+                } else {
+                    switch sender.state {
+                    case .began:
+                        shareCustomPictureWith(gesture: sender)
+                    case .ended:
+                        resetCustomPicture()
+                    default:
+                        break
+                    }
+            }
+            default:
+                break
+        }
+    }
+    
+    @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
+        swipeLabel.text = "Swipe left to share"
+        switch layoutView.style {
+        case 1, 2:
+            if arrayPhotos.count < 3 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
+            }
+        case 3:
+            if arrayPhotos.count < 4 {
+                alertPhotoMissed()
+            } else {
+                switch sender.state {
+                case .began:
+                    shareCustomPictureWith(gesture: sender)
+                case .ended:
+                    resetCustomPicture()
+                default:
+                    break
+                }
+            }
         default:
             break
         }
     }
-    
+        
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
+        let activityItem: [AnyObject] = [self.upImageView.image as AnyObject]
+        let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
+        self.present(avc, animated: true, completion: nil)
     }
     
     private func resetCustomPicture() {
-        arrayPhotos = []
+        arrayPhotos.removeAll()
+        centerView.upLeftButton?.backgroundColor = UIColor.white
+        centerView.upLeftButton?.setImage(UIImage(named: "Plus"), for: .normal)
+        centerView.upRightButton?.backgroundColor = UIColor.white
+        centerView.upRightButton?.setImage(UIImage(named: "Plus"), for: .normal)
+        centerView.downLeftButton?.backgroundColor = UIColor.white
+        centerView.downLeftButton?.setImage(UIImage(named: "Plus"), for: .normal)
+        centerView.downRightButton?.backgroundColor = UIColor.white
+        centerView.downRightButton?.setImage(UIImage(named: "Plus"), for: .normal)
     }
     
     private func alertPhotoMissed() {
