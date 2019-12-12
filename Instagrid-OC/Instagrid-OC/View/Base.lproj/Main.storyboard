@@ -107,7 +107,7 @@
                                                         <exclude reference="l1J-IX-P45"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=compact">
+                                                <variation key="heightClass=compact" alignment="fill">
                                                     <mask key="constraints">
                                                         <include reference="DRQ-Bw-WdR"/>
                                                         <include reference="IIH-wA-fz0"/>
@@ -136,17 +136,19 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <variation key="heightClass=compact" alignment="fill"/>
                                             </stackView>
                                         </subviews>
+                                        <variation key="heightClass=compact" alignment="fill"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.39679268000000001" blue="0.60697406529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="45U-ql-gmu" secondAttribute="trailing" constant="8" id="Ctt-Qr-sGA">
-                                        <variation key="heightClass=compact" constant="-319"/>
+                                        <variation key="heightClass=compact" constant="8"/>
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="45U-ql-gmu" secondAttribute="bottom" constant="8" id="Q0b-bY-dOP">
-                                        <variation key="heightClass=compact" constant="-319"/>
+                                        <variation key="heightClass=compact" constant="8"/>
                                     </constraint>
                                     <constraint firstAttribute="width" secondItem="zgr-4z-zv8" secondAttribute="height" multiplier="1:1" id="hXB-6x-8k8"/>
                                     <constraint firstItem="45U-ql-gmu" firstAttribute="leading" secondItem="zgr-4z-zv8" secondAttribute="leading" constant="8" id="uOC-4y-209"/>
@@ -165,7 +167,9 @@
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLm-58-NbX">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="zCX-Ii-inx"/>
+                                            <constraint firstAttribute="width" constant="80" id="zCX-Ii-inx">
+                                                <variation key="heightClass=compact" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 1"/>
                                         <connections>
@@ -188,13 +192,23 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="XfB-eA-TGF" firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="width" id="2om-gP-enr"/>
+                                    <constraint firstItem="R5t-FN-WA5" firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="width" id="A3h-9d-eBo"/>
                                     <constraint firstItem="XfB-eA-TGF" firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="width" id="K1Z-p7-2uu"/>
                                     <constraint firstItem="R5t-FN-WA5" firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="width" id="KUc-VR-Mt7"/>
                                     <constraint firstAttribute="height" constant="80" id="PAu-y3-mth"/>
                                 </constraints>
-                                <variation key="heightClass=compact" axis="vertical">
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="A3h-9d-eBo"/>
+                                        <exclude reference="2om-gP-enr"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact" axis="vertical" spacing="16">
                                     <mask key="constraints">
                                         <exclude reference="PAu-y3-mth"/>
+                                        <include reference="A3h-9d-eBo"/>
+                                        <include reference="2om-gP-enr"/>
                                     </mask>
                                 </variation>
                                 <connections>
