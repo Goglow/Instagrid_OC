@@ -12,10 +12,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var currentButton: UIButton?
     var arrayPhotos = [UIImage]()
-    var imageIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         let upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(upSharePicture(_ :)))
         upSwipeGestureRecognizer.direction = .up
@@ -77,34 +78,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         layoutView.style = layout
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func rotated() {
+        if UIDevice.current.orientation.isLandscape {
+            self.swipeLabel.text = "Swipe left to share"
+        } else {
+            self.swipeLabel.text = "Swipe up to share"
+        }
+    }
+    
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
-        swipeLabel.text = "Swipe up to share"
         switch layoutView.style {
         case 1, 2:
             if arrayPhotos.count < 3 {
                 alertPhotoMissed()
             } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
+                shareCustomPictureWith(gesture: sender)
                 }
-            }
         case 3:
             if arrayPhotos.count < 4 {
                 alertPhotoMissed()
             } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
-                }
+                shareCustomPictureWith(gesture: sender)
             }
         default:
             break
@@ -112,33 +110,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
-        swipeLabel.text = "Swipe left to share"
         switch layoutView.style {
         case 1, 2:
             if arrayPhotos.count < 3 {
                 alertPhotoMissed()
             } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
-                }
+                shareCustomPictureWith(gesture: sender)
             }
         case 3:
             if arrayPhotos.count < 4 {
                 alertPhotoMissed()
             } else {
-                switch sender.state {
-                case .began:
-                    shareCustomPictureWith(gesture: sender)
-                case .ended:
-                    resetCustomPicture()
-                default:
-                    break
-                }
+                shareCustomPictureWith(gesture: sender)
             }
         default:
             break
@@ -149,6 +132,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let activityItem: [AnyObject] = [self.upImageView.image as AnyObject]
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         self.present(avc, animated: true, completion: nil)
+    //    self.resetCustomPicture()
     }
     
     private func resetCustomPicture() {
