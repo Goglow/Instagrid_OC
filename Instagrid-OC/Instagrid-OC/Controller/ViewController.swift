@@ -129,8 +129,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
         
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
-        let activityItem: [AnyObject] = [self.upImageView.image as AnyObject]
+        let activityItem: [AnyObject] = [centerView.asImage()]
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
+        avc.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                // User canceled
+                return
+            }
+            // User completed activity
+            self.resetCustomPicture()
+        }
         self.present(avc, animated: true, completion: nil)
     //    self.resetCustomPicture()
     }
