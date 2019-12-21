@@ -18,13 +18,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        let upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(upSharePicture(_ :)))
-        upSwipeGestureRecognizer.direction = .up
-        centerView.addGestureRecognizer(upSwipeGestureRecognizer)
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSharePicture(_ :)))
+        upSwipe.direction = .up
+        centerView.addGestureRecognizer(upSwipe)
         
-        let leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSharePicture(_ :)))
-        leftSwipeGestureRecognizer.direction = .left
-        centerView.addGestureRecognizer(leftSwipeGestureRecognizer)
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSharePicture(_ :)))
+        leftSwipe.direction = .left
+        centerView.addGestureRecognizer(leftSwipe)
         
         setLayout(layout: 2)
         setCenterView(layout: 2)
@@ -78,10 +78,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         layoutView.style = layout
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     @objc func rotated() {
         if UIDevice.current.orientation.isLandscape {
             self.swipeLabel.text = "Swipe left to share"
@@ -133,14 +129,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         avc.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
-                // User canceled
                 return
             }
-            // User completed activity
+          //  self.centerView.transform = .identity
             self.resetCustomPicture()
         }
         self.present(avc, animated: true, completion: nil)
-    //    self.resetCustomPicture()
     }
     
     private func resetCustomPicture() {
