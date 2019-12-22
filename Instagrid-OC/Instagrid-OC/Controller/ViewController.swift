@@ -33,7 +33,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Outlets
     @IBOutlet weak var instagridLabel: UILabel!
     @IBOutlet weak var swipeView: UIStackView!
-    @IBOutlet weak var upImageView: UIImageView!
+    @IBOutlet weak var swipeImageView: UIImageView!
     @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var centerView: CenterView!
     @IBOutlet weak var layoutView: LayoutView!
@@ -78,11 +78,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         layoutView.style = layout
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func rotated() {
         if UIDevice.current.orientation.isLandscape {
             self.swipeLabel.text = "Swipe left to share"
+            swipeImageView.image = #imageLiteral(resourceName: "Arrow Left")
         } else {
             self.swipeLabel.text = "Swipe up to share"
+            swipeImageView.image = #imageLiteral(resourceName: "Arrow Up")
         }
     }
     

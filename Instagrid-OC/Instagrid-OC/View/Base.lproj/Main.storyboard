@@ -174,10 +174,10 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" restorationIdentifier="LV" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="x5t-yK-5nP" customClass="LayoutView" customModule="Instagrid_OC" customModuleProvider="target">
-                                <rect key="frame" x="530" y="63" width="70" height="250"/>
+                                <rect key="frame" x="530" y="62.5" width="70" height="250.5"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLm-58-NbX">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="gh4-Mb-PN2">
                                                 <variation key="heightClass=compact" constant="70"/>
@@ -197,14 +197,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5t-FN-WA5">
-                                        <rect key="frame" x="0.0" y="90" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="90.5" width="70" height="70"/>
                                         <state key="normal" backgroundImage="Layout 2"/>
                                         <connections>
                                             <action selector="didTapLayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cp1-jr-s7P"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfB-eA-TGF">
-                                        <rect key="frame" x="0.0" y="180" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="180.5" width="70" height="70"/>
                                         <state key="normal" backgroundImage="Layout 3"/>
                                         <connections>
                                             <action selector="didTapLayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GQb-oa-3DU"/>
@@ -289,9 +289,9 @@
                         <outlet property="centerView" destination="zgr-4z-zv8" id="NS4-pk-fsf"/>
                         <outlet property="instagridLabel" destination="pmC-KP-J0j" id="rsN-jc-klI"/>
                         <outlet property="layoutView" destination="x5t-yK-5nP" id="Iyw-Vt-oTa"/>
+                        <outlet property="swipeImageView" destination="xzv-Oa-lK6" id="vTS-fu-erW"/>
                         <outlet property="swipeLabel" destination="tfv-Ic-Iic" id="3x7-EZ-Bsw"/>
                         <outlet property="swipeView" destination="mB6-8J-vTy" id="Nez-k3-mPK"/>
-                        <outlet property="upImageView" destination="xzv-Oa-lK6" id="vTS-fu-erW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
