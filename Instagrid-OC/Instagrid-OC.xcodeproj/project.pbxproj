@@ -16,7 +16,7 @@
 		83915949239AB4020008D18C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83915947239AB4020008D18C /* Main.storyboard */; };
 		8391594B239AB4020008D18C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8391594A239AB4020008D18C /* Assets.xcassets */; };
 		8391594E239AB4020008D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8391594C239AB4020008D18C /* LaunchScreen.storyboard */; };
-		83D9329123B22DA100FAC685 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9329023B22DA100FAC685 /* Action.swift */; };
+		83D9329323B22E5F00FAC685 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9329223B22E5F00FAC685 /* Action.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		8391594A239AB4020008D18C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8391594D239AB4020008D18C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8391594F239AB4020008D18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83D9329023B22DA100FAC685 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Action.swift; path = ../../../../../../Desktop/Action.swift; sourceTree = "<group>"; };
+		83D9329223B22E5F00FAC685 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 		835982D9239C7F0200E457ED /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				83D9329023B22DA100FAC685 /* Action.swift */,
+				83D9329223B22E5F00FAC685 /* Action.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,7 +188,7 @@
 				836A24D5239D3D6700DCFE11 /* LayoutView.swift in Sources */,
 				83915946239AB4020008D18C /* ViewController.swift in Sources */,
 				836A24D3239D3D5A00DCFE11 /* CenterView.swift in Sources */,
-				83D9329123B22DA100FAC685 /* Action.swift in Sources */,
+				83D9329323B22E5F00FAC685 /* Action.swift in Sources */,
 				83915944239AB4020008D18C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
