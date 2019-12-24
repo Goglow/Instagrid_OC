@@ -92,6 +92,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    func swipeCenterView(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .began {
+            switch sender.state {
+            case .began, .changed:
+                swipeCenterViewWith(gesture: sender)
+            case .cancelled, .ended:
+                returnToTheFirstPlace()
+            default:
+                break
+            }
+        }
+    }
+    
+    private func swipeCenterViewWith(gesture: UISwipeGestureRecognizer) {
+        
+    }
+    
+    private func returnToTheFirstPlace() {
+        
+    }
+    
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         switch layoutView.style {
         case 1, 2:
@@ -137,7 +158,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if !completed {
                 return
             }
-          //  self.centerView.transform = .identity
             self.resetCustomPicture()
         }
         self.present(avc, animated: true, completion: nil)
