@@ -12,18 +12,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var currentButton: UIButton?
     var arrayPhotos = [UIImage]()
+/*    var action = Action()
+    let screenWidth = UIScreen.main.bounds.width
+    var translationTransform: CGAffineTransform*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSharePicture(_ :)))
-        upSwipe.direction = .up
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSharePicture(_:)))
+        upSwipe.direction = UISwipeGestureRecognizerDirection.up
         centerView.addGestureRecognizer(upSwipe)
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSharePicture(_ :)))
-        leftSwipe.direction = .left
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSharePicture(_:)))
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
         centerView.addGestureRecognizer(leftSwipe)
         
         setLayout(layout: 2)
@@ -92,8 +95,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    func swipeCenterView(_ sender: UISwipeGestureRecognizer) {
-        if sender.state == .began {
+    /* func swipeCenterView(_ sender: UISwipeGestureRecognizer) {
+        if action.state == .ongoing {
             switch sender.state {
             case .began, .changed:
                 swipeCenterViewWith(gesture: sender)
@@ -106,12 +109,65 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     private func swipeCenterViewWith(gesture: UISwipeGestureRecognizer) {
-        
+        let translation = gesture.direction
+        centerView.transform = CGAffineTransform(translationX: CGFloat, y: CGFloat)
     }
     
     private func returnToTheFirstPlace() {
         
+    }*/
+    
+   /* @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if UIDevice.current.orientation.isPortrait {
+            self.translationTransform = CGAffineTransform(translationX: screenWidth, y: 0)
+        } else {
+            self.translationTransform = CGAffineTransform(translationX: -screenWidth, y: 0)
+        }
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.up:
+                print("Swiped up")
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.centerView.transform = self.translationTransform
+                }, completion: nil)
+            case UISwipeGestureRecognizerDirection.left:
+                print("Swiped left")
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.centerView.transform = self.translationTransform
+                }, completion: nil)
+            default:
+                break
+            }
+        }
+    }*/
+    
+   /* @objc func didSwipeUp(gesture: UIGestureRecognizer, sender: UISwipeGestureRecognizer) {
+        upSharePicture(sender)
+        DispatchQueue.main.async(execute: {
+            let animation = CATransition()
+            animation.type = kCATransitionReveal
+            animation.subtype = kCATransitionFromBottom
+            animation.duration = 0.5
+            animation.delegate = self.centerView as? CAAnimationDelegate
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            self.centerView.layer.add(animation, forKey: nil)
+            self.centerView.removeFromSuperview()
+        })
     }
+    
+    @objc func didSwipeLeft(gesture: UIGestureRecognizer, sender: UISwipeGestureRecognizer) {
+        leftSharePicture(sender)
+        DispatchQueue.main.async(execute: {
+            let animation = CATransition()
+            animation.type = kCATransitionReveal
+            animation.subtype = kCATransitionFromRight
+            animation.duration = 0.5
+            animation.delegate = self.centerView as? CAAnimationDelegate
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            self.centerView.layer.add(animation, forKey: nil)
+            self.centerView.removeFromSuperview()
+        })
+    }*/
     
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         switch layoutView.style {
@@ -150,7 +206,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             break
         }
     }
-        
+    
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
         let activityItem: [AnyObject] = [centerView.asImage()]
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)

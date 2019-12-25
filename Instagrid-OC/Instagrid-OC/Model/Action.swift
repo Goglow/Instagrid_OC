@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class Action {
+    var state: State = .ongoing
+
+    enum State {
+        case ongoing, over
+    }
+}
