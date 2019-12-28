@@ -99,16 +99,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
+                UIView.animate(withDuration: 0.8, animations: {
+                    self.moveTop(view: self.centerView)
+                }) { (finished) in
+                    if finished {
+                        UIView.animate(withDuration: 0.8, animations: {
+                            self.moveDown(view: self.centerView)
+                        })
+                    }
                 }
+            }
         case 3:
             if arrayPhotos.count < 4 {
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
+                UIView.animate(withDuration: 0.8, animations: {
+                    self.moveTop(view: self.centerView)
+                }) { (finished) in
+                    if finished {
+                        UIView.animate(withDuration: 0.8, animations: {
+                            self.moveDown(view: self.centerView)
+                        })
+                    }
+                }
             }
         default:
             break
         }
+    }
+    
+    private func moveTop(view: CenterView) {
+        view.center.y -= 200
+    }
+    
+    private func moveDown(view: CenterView) {
+        view.center.y += 200
     }
     
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
@@ -118,16 +144,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
+                UIView.animate(withDuration: 0.8, delay: 0, animations: {
+                    self.moveLeft(view: self.centerView)
+                }) { (finished) in
+                    if finished {
+                        UIView.animate(withDuration: 0.8, animations: {
+                            self.moveRight(view: self.centerView)
+                        })
+                    }
+                }
             }
         case 3:
             if arrayPhotos.count < 4 {
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
+                UIView.animate(withDuration: 0.8, delay: 0, animations: {
+                    self.moveLeft(view: self.centerView)
+                }) { (finished) in
+                    if finished {
+                        UIView.animate(withDuration: 0.8, animations: {
+                            self.moveRight(view: self.centerView)
+                        })
+                    }
+                }
             }
         default:
             break
         }
+    }
+    
+    private func moveLeft(view: CenterView) {
+        view.center.x -= 200
+    }
+    
+    private func moveRight(view: CenterView) {
+        view.center.x += 200
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
