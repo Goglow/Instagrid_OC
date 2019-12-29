@@ -43,13 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		835982D9239C7F0200E457ED /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		835982DA239C7F2500E457ED /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +93,6 @@
 		83915942239AB4020008D18C /* Instagrid-OC */ = {
 			isa = PBXGroup;
 			children = (
-				835982D9239C7F0200E457ED /* Model */,
 				835982DA239C7F2500E457ED /* View */,
 				835982DB239C7F3200E457ED /* Controller */,
 				835982DC239C7F3B00E457ED /* Supporting files */,
