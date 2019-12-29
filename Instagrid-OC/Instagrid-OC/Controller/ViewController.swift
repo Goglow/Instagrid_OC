@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var currentButton: UIButton?
     var arrayPhotos = [UIImage]()
+    let screenWidth = UIScreen.main.bounds.width
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,11 +131,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     private func moveTop(view: CenterView) {
-        view.center.y -= 200
+        view.center.y -= screenWidth
     }
     
     private func moveDown(view: CenterView) {
-        view.center.y += 200
+        view.center.y += screenWidth
     }
     
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
@@ -144,11 +145,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
-                UIView.animate(withDuration: 0.8, delay: 0, animations: {
+                UIView.animate(withDuration: 0.3, animations: {
                     self.moveLeft(view: self.centerView)
                 }) { (finished) in
                     if finished {
-                        UIView.animate(withDuration: 0.8, animations: {
+                        UIView.animate(withDuration: 0.3, animations: {
                             self.moveRight(view: self.centerView)
                         })
                     }
@@ -159,27 +160,35 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
-                UIView.animate(withDuration: 0.8, delay: 0, animations: {
+                switch sender.state {
+                    case .began:
+                        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, animations: {
+                            self.moveLeft(view: self.centerView)})
+                    case .cancelled, .changed, .ended:
+                        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, animations: {
+                            self.moveRight(view: self.centerView)})
+                    default:
+                        break
+                }
+            }
+             /*UIView.animate(withDuration: 0.3, animations: {
                     self.moveLeft(view: self.centerView)
                 }) { (finished) in
                     if finished {
-                        UIView.animate(withDuration: 0.8, animations: {
+                        UIView.animate(withDuration: 0.3, animations: {
                             self.moveRight(view: self.centerView)
-                        })
-                    }
-                }
-            }
+                        })*/
         default:
             break
         }
     }
     
     private func moveLeft(view: CenterView) {
-        view.center.x -= 200
+        view.center.x -= screenWidth
     }
     
     private func moveRight(view: CenterView) {
-        view.center.x += 200
+        view.center.x += screenWidth
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
