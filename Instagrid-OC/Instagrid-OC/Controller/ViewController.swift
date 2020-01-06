@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var currentButton: UIButton?
     var arrayPhotos = [UIImage]()
     let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,42 +101,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
-                UIView.animate(withDuration: 0.8, animations: {
-                    self.moveTop(view: self.centerView)
-                }) { (finished) in
-                    if finished {
-                        UIView.animate(withDuration: 0.8, animations: {
-                            self.moveDown(view: self.centerView)
-                        })
                     }
-                }
-            }
         case 3:
             if arrayPhotos.count < 4 {
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
-                UIView.animate(withDuration: 0.8, animations: {
-                    self.moveTop(view: self.centerView)
-                }) { (finished) in
-                    if finished {
-                        UIView.animate(withDuration: 0.8, animations: {
-                            self.moveDown(view: self.centerView)
-                        })
-                    }
                 }
-            }
         default:
             break
         }
-    }
-    
-    private func moveTop(view: CenterView) {
-        view.center.y -= screenWidth
-    }
-    
-    private func moveDown(view: CenterView) {
-        view.center.y += screenWidth
     }
     
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
@@ -145,50 +120,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.moveLeft(view: self.centerView)
-                }) { (finished) in
-                    if finished {
-                        UIView.animate(withDuration: 0.3, animations: {
-                            self.moveRight(view: self.centerView)
-                        })
-                    }
-                }
             }
         case 3:
             if arrayPhotos.count < 4 {
                 alertPhotoMissed()
             } else {
                 shareCustomPictureWith(gesture: sender)
-                switch sender.state {
-                    case .began:
-                        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, animations: {
-                            self.moveLeft(view: self.centerView)})
-                    case .cancelled, .changed, .ended:
-                        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, animations: {
-                            self.moveRight(view: self.centerView)})
-                    default:
-                        break
-                }
             }
-             /*UIView.animate(withDuration: 0.3, animations: {
-                    self.moveLeft(view: self.centerView)
-                }) { (finished) in
-                    if finished {
-                        UIView.animate(withDuration: 0.3, animations: {
-                            self.moveRight(view: self.centerView)
-                        })*/
         default:
             break
         }
     }
-    
+
+    private func moveTop(view: CenterView) {
+        view.center.y -= screenWidth
+    }
+
+    private func moveDown(view: CenterView) {
+        view.center.y += screenWidth
+    }
+
     private func moveLeft(view: CenterView) {
-        view.center.x -= screenWidth
+        view.center.x -= screenHeight
     }
     
     private func moveRight(view: CenterView) {
-        view.center.x += screenWidth
+        view.center.x += screenHeight
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
@@ -201,6 +158,52 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.resetCustomPicture()
         }
         self.present(avc, animated: true, completion: nil)
+            if UIDevice.current.orientation.isLandscape {
+                UIView.animate(withDuration: 0.6, animations: {
+                    self.moveLeft(view: self.centerView)
+                })
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.moveTop(view: self.centerView)
+                })
+            }
+        avc.completionWithItemsHandler = { (activityType: UIActivityType?, completed:
+            Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            if completed {
+                print("share completed")
+                    if UIDevice.current.orientation.isLandscape {
+                        UIView.animate(withDuration: 0.6, animations: {
+                            self.moveRight(view: self.centerView)
+                        })
+                    } else {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.moveDown(view: self.centerView)
+                })
+                }
+                return
+            } else {
+                print("cancel")
+                    if UIDevice.current.orientation.isLandscape {
+                        UIView.animate(withDuration: 0.6, animations: {
+                            self.moveRight(view: self.centerView)
+                        })
+                    } else {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.moveDown(view: self.centerView)
+                })
+                }
+            }
+            if let shareError = error {
+                print("error while sharing: \(shareError.localizedDescription)")
+                UIView.animate(withDuration: 0.6, animations: {
+                    self.moveRight(view: self.centerView)
+                })
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.moveDown(view: self.centerView)
+                })
+            }
+        }
     }
     
     private func resetCustomPicture() {
@@ -221,5 +224,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(_: UIAlertAction!) in
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension UIImagePickerController
+{
+    override open var shouldAutorotate: Bool {
+        return true
+    }
+    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .all
     }
 }
