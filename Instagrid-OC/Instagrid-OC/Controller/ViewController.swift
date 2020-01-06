@@ -133,22 +133,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func moveTop(view: CenterView) {
-        view.center.y -= screenWidth
+        view.center.y -= screenHeight
     }
 
     private func moveDown(view: CenterView) {
-        view.center.y += screenWidth
+        view.center.y += screenHeight
     }
 
     private func moveLeft(view: CenterView) {
-        view.center.x -= screenHeight
+        view.center.x -= screenWidth
     }
     
     private func moveRight(view: CenterView) {
-        view.center.x += screenHeight
+        view.center.x += screenWidth
     }
     
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
+
         let activityItem: [AnyObject] = [centerView.asImage()]
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         avc.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
