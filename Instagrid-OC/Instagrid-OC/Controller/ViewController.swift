@@ -10,16 +10,22 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    // Variables and constants:
+    // This is the button currently used.
     var currentButton: UIButton?
+    // It is an array storing the selected images.
     var arrayPhotos = [UIImage]()
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
+    // ViewDidLoad:
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the rotation of the device (portrait, landscape)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
+        // Set the possible directions of swipe (up, left)
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSharePicture(_:)))
         upSwipe.direction = UISwipeGestureRecognizerDirection.up
         centerView.addGestureRecognizer(upSwipe)
@@ -28,11 +34,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         leftSwipe.direction = UISwipeGestureRecognizerDirection.left
         centerView.addGestureRecognizer(leftSwipe)
         
+        // Set the choice of default LayoutView and CenterView
         setLayout(layout: 2)
         setCenterView(layout: 2)
     }
 
-    // Outlets
+    // Outlets:
     @IBOutlet weak var instagridLabel: UILabel!
     @IBOutlet weak var swipeView: UIStackView!
     @IBOutlet weak var swipeImageView: UIImageView!
@@ -40,7 +47,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var centerView: CenterView!
     @IBOutlet weak var layoutView: LayoutView!
     
-    // Actions
+    // Actions:
+    // When we hit the button to insert a photo...
     @IBAction func didTapPhotoButton(_ sender: UIButton) {
         self.currentButton = sender
         addPicture()
@@ -49,7 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private func setCenterView(layout: Int) {
         centerView.style = layout
     }
-    
+    // ...a photo is taken from the available catalog (in our case the library) and takes the place of the button.
     private func addPicture() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePicker = UIImagePickerController()
@@ -67,6 +75,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         button.setImage(imagePicked, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
+        // This photo is added to the table and we then know how many photos are missing before providing additional action (sharing, recording...).
         arrayPhotos.append(imagePicked)
         dismiss(animated: true, completion: nil)
     }
@@ -86,14 +95,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @objc func rotated() {
         if UIDevice.current.orientation.isLandscape {
+            // Necessary to change the image and the label (here: left).
             self.swipeLabel.text = "Swipe left to share"
             swipeImageView.image = #imageLiteral(resourceName: "Arrow Left")
         } else {
+            // Same for the second possibility (here: up).
             self.swipeLabel.text = "Swipe up to share"
             swipeImageView.image = #imageLiteral(resourceName: "Arrow Up")
         }
     }
-    
+    // If the number of photos is sufficient, we can then continue (share) otherwise we have an error message (portrait mode).
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         switch layoutView.style {
         case 1, 2:
@@ -112,7 +123,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             break
         }
     }
-    
+    // If the number of photos is sufficient, we can then continue (share) otherwise we have an error message (landscape mode).
     @objc func leftSharePicture(_ sender: UISwipeGestureRecognizer) {
         switch layoutView.style {
         case 1, 2:
@@ -148,9 +159,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.center.x += screenWidth
     }
     
+    // To share, we must make a swipe movement (up or left).
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
-
         let activityItem: [AnyObject] = [centerView.asImage()]
+        // If the action is not complete, there is no animation and the central view is reset to the starting point.
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         avc.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
@@ -158,6 +170,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
             self.resetCustomPicture()
         }
+        // If the action is good, there is an animation along the same lines as the swipe.
         self.present(avc, animated: true, completion: nil)
             if UIDevice.current.orientation.isLandscape {
                 UIView.animate(withDuration: 0.6, animations: {
@@ -168,8 +181,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     self.moveTop(view: self.centerView)
                 })
             }
+        // If the action is completed/finished, canceled or there is an error, the movement is reversed.
         avc.completionWithItemsHandler = { (activityType: UIActivityType?, completed:
             Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            // Completed/Finished mode.
             if completed {
                 print("share completed")
                     if UIDevice.current.orientation.isLandscape {
@@ -183,6 +198,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
                 return
             } else {
+                // Canceled mode.
                 print("cancel")
                     if UIDevice.current.orientation.isLandscape {
                         UIView.animate(withDuration: 0.6, animations: {
@@ -194,6 +210,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 })
                 }
             }
+            // Error mode.
             if let shareError = error {
                 print("error while sharing: \(shareError.localizedDescription)")
                 UIView.animate(withDuration: 0.6, animations: {
@@ -206,7 +223,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
-    
+    // This private function allows you to reset the CenterView to zero after sharing or other action.
     private func resetCustomPicture() {
         arrayPhotos.removeAll()
         centerView.upLeftButton?.backgroundColor = UIColor.white
@@ -218,7 +235,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         centerView.downRightButton?.backgroundColor = UIColor.white
         centerView.downRightButton?.setImage(UIImage(named: "Plus"), for: .normal)
     }
-    
+    // This private function allows you to report missing photos in the CenterView.
     private func alertPhotoMissed() {
         let message = "The minimum number of photos that must be added has not been reached."
         let alert = UIAlertController(title: "Minimum Not Reached", message: message, preferredStyle: .alert)
@@ -227,7 +244,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(alert, animated: true, completion: nil)
     }
 }
-
+// An extension to use UIImagePickerController in landscape orientation.
 extension UIImagePickerController
 {
     override open var shouldAutorotate: Bool {
