@@ -57,7 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private func setCenterView(layout: Int) {
         centerView.style = layout
     }
-    // ...a photo is taken from the available catalog (in our case the library) and takes the place of the button.
+    // ...she is taken from the available catalog (in our case the library) and takes the place of the button.
     private func addPicture() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePicker = UIImagePickerController()
@@ -162,7 +162,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // To share, we must make a swipe movement (up or left).
     private func shareCustomPictureWith(gesture: UISwipeGestureRecognizer) {
         let activityItem: [AnyObject] = [centerView.asImage()]
-        // If the action is not complete, there is no animation and the central view is reset to the starting point.
+        // If the action is not completed, there is no animation and the CenterView is reset to the starting point.
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         avc.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
@@ -177,7 +177,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     self.moveLeft(view: self.centerView)
                 })
             } else {
-                UIView.animate(withDuration: 0.3, animations: {
+                UIView.animate(withDuration: 0.6, animations: {
                     self.moveTop(view: self.centerView)
                 })
             }
@@ -192,10 +192,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             self.moveRight(view: self.centerView)
                         })
                     } else {
-                        UIView.animate(withDuration: 0.3, animations: {
+                        UIView.animate(withDuration: 0.6, animations: {
                             self.moveDown(view: self.centerView)
-                })
-                }
+                        })
+                        self.resetCustomPicture()
+                    }
                 return
             } else {
                 // Canceled mode.
@@ -205,24 +206,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             self.moveRight(view: self.centerView)
                         })
                     } else {
-                        UIView.animate(withDuration: 0.3, animations: {
+                        UIView.animate(withDuration: 0.6, animations: {
                             self.moveDown(view: self.centerView)
-                })
-                }
+                        })
+                        self.resetCustomPicture()
+                    }
             }
             // Error mode.
             if let shareError = error {
                 print("error while sharing: \(shareError.localizedDescription)")
-                UIView.animate(withDuration: 0.6, animations: {
-                    self.moveRight(view: self.centerView)
-                })
-            } else {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.moveDown(view: self.centerView)
-                })
+                    if UIDevice.current.orientation.isLandscape {
+                        UIView.animate(withDuration: 0.6, animations: {
+                            self.moveRight(view: self.centerView)
+                        })
+                    } else {
+                        UIView.animate(withDuration: 0.6, animations: {
+                            self.moveDown(view: self.centerView)
+                        })
+                        self.resetCustomPicture()
+                }
             }
         }
     }
+    
     // This private function allows you to reset the CenterView to zero after sharing or other action.
     private func resetCustomPicture() {
         arrayPhotos.removeAll()
