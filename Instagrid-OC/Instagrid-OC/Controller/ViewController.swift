@@ -15,8 +15,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var currentButton: UIButton?
     // It is an array storing the selected images.
     var arrayPhotos = [UIImage]()
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
+    // Use all the space to animate in portrait or landscape.
+   var screenWidth = UIScreen.main.bounds.size.width
+   var screenHeight = UIScreen.main.bounds.size.height
     
     // ViewDidLoad:
     override func viewDidLoad() {
@@ -191,6 +192,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         UIView.animate(withDuration: 0.6, animations: {
                             self.moveRight(view: self.centerView)
                         })
+                        self.resetCustomPicture()
                     } else {
                         UIView.animate(withDuration: 0.6, animations: {
                             self.moveDown(view: self.centerView)
@@ -205,6 +207,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         UIView.animate(withDuration: 0.6, animations: {
                             self.moveRight(view: self.centerView)
                         })
+                        self.resetCustomPicture()
                     } else {
                         UIView.animate(withDuration: 0.6, animations: {
                             self.moveDown(view: self.centerView)
@@ -219,6 +222,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         UIView.animate(withDuration: 0.6, animations: {
                             self.moveRight(view: self.centerView)
                         })
+                        self.resetCustomPicture()
                     } else {
                         UIView.animate(withDuration: 0.6, animations: {
                             self.moveDown(view: self.centerView)
