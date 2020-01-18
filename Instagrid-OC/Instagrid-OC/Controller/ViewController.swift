@@ -15,9 +15,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var currentButton: UIButton?
     // It is an array storing the selected images.
     var arrayPhotos = [UIImage]()
-    // Use all the space to animate in portrait or landscape.
-   var screenWidth = UIScreen.main.bounds.size.width
-   var screenHeight = UIScreen.main.bounds.size.height
     
     // ViewDidLoad:
     override func viewDidLoad() {
@@ -105,6 +102,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             swipeImageView.image = #imageLiteral(resourceName: "Arrow Up")
         }
     }
+    
+    // Use all the space of the window to animate in portrait or landscape.
+    func windowHeight() -> CGFloat {
+        return UIScreen.main.bounds.size.height
+    }
+    
+    func windowWidth() -> CGFloat {
+        return UIScreen.main.bounds.size.width
+    }
+    
     // If the number of photos is sufficient, we can then continue (share) otherwise we have an error message (portrait mode).
     @objc func upSharePicture(_ sender: UISwipeGestureRecognizer) {
         switch layoutView.style {
@@ -145,19 +152,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     private func moveTop(view: CenterView) {
-        view.center.y -= screenHeight
+        view.center.y -= windowHeight()
     }
 
     private func moveDown(view: CenterView) {
-        view.center.y += screenHeight
+        view.center.y += windowHeight()
     }
 
     private func moveLeft(view: CenterView) {
-        view.center.x -= screenWidth
+        view.center.x -= windowWidth()
     }
     
     private func moveRight(view: CenterView) {
-        view.center.x += screenWidth
+        view.center.x += windowWidth()
     }
     
     // To share, we must make a swipe movement (up or left).
