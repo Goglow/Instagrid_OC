@@ -141,6 +141,16 @@
                                             <constraint firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="height" multiplier="80:80" id="bRg-sO-66X"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 1"/>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="Cio-7k-CCd"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="bRg-sO-66X"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="didTapLayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EAt-Tn-0iQ"/>
                                         </connections>
@@ -152,6 +162,12 @@
                                             <constraint firstAttribute="width" constant="80" id="yaa-vK-vod"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 2"/>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="EWw-6H-L6V"/>
+                                                <include reference="yaa-vK-vod"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="didTapLayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cp1-jr-s7P"/>
                                         </connections>
@@ -163,16 +179,29 @@
                                             <constraint firstAttribute="width" constant="80" id="wNF-iN-HQ6"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="Layout 3"/>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="aXN-FX-FpH"/>
+                                                <include reference="wNF-iN-HQ6"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="didTapLayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GQb-oa-3DU"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="XfB-eA-TGF" firstAttribute="height" secondItem="lLm-58-NbX" secondAttribute="height" id="HVC-6S-DmF"/>
                                     <constraint firstItem="R5t-FN-WA5" firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="width" id="IDX-nt-J3x"/>
+                                    <constraint firstItem="R5t-FN-WA5" firstAttribute="height" secondItem="lLm-58-NbX" secondAttribute="height" id="XMb-Pv-Scg"/>
                                     <constraint firstItem="XfB-eA-TGF" firstAttribute="width" secondItem="lLm-58-NbX" secondAttribute="width" id="my8-AO-DuU"/>
                                 </constraints>
-                                <variation key="heightClass=compact" axis="vertical" distribution="equalCentering" spacing="4"/>
+                                <variation key="heightClass=compact" axis="vertical" distribution="equalCentering" spacing="4">
+                                    <mask key="constraints">
+                                        <exclude reference="IDX-nt-J3x"/>
+                                        <exclude reference="my8-AO-DuU"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="centerButton" destination="R5t-FN-WA5" id="HOW-j4-s0K"/>
                                     <outlet property="leftButton" destination="lLm-58-NbX" id="aP6-3J-XxD"/>
